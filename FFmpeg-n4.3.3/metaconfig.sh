@@ -1,1 +1,1 @@
-./configure --extra-libs='-L$PWD/metartc2 -lmetartccore2 -lpthread -lsrtp2 -lssl -lcrypto -ldl'
+./configure --extra-libs='-L/path/metartc2 -lmetartccore2 -lpthread -lspeexdsp -lsrtp2 -lssl -lcrypto -ldl'

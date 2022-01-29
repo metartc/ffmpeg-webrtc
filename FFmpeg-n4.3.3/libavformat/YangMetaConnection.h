@@ -70,12 +70,23 @@ typedef enum YangRtcMessageType{
 	YangRTC_Decoder_Input
 }YangRtcMessageType;
 typedef struct{
+	void *context;
+	void (*init)(void* context,int32_t sample,int32_t channel);
+	void (*closeAec)(void* context);
+
+	void (*echoCapture)(void* context,short *rec, short *out);
+	void (*preprocessRun)(void* context,short *pcm);
+	void (*echoStateReset)(void* context);
+	void (*echoPlayback)(void* context,short *play);
+	void (*echoCancellation)(void* context,const short *rec, const short *play,
+			short *out);
+}YangAec;
+typedef struct{
 	void (*receiveAudio)(YangFrame *audioFrame, void *user);
 	void (*receiveVideo)(YangFrame *videoFrame, void *user);
 	void (*sendRequest)(int32_t puid, uint32_t ssrc, YangRequestType req,void* user);
 	void (*setPlayMediaConfig)(	YangAudioParam *remote_audio,YangVideoParam *remote_video,void* user);
 } YangMetaRtcCallback;
-
 typedef struct {
 	void* context;
 	void (*init)(void* context,YangMetaRtcCallback* callback,void* user);
@@ -87,8 +98,10 @@ typedef struct {
 	int32_t (*publishAudio)(void* context,YangFrame* audioFrame);
 	int32_t (*publishVideo)(void* context,YangFrame* videoFrame);
 	int32_t (*getState)(void* context);
-	int32_t (*recvvideo_notify)(void* context, YangRtcMessageType mess);
+	int32_t (*recvvideoNotify)(void* context, YangRtcMessageType mess);
 }YangMetaConnection;
 void yang_init_metaConnection(YangMetaConnection* metaconn);
 void yang_destroy_metaConnection(YangMetaConnection* metaconn);
+void yang_init_aec(YangAec* aec);
+void yang_destroy_aec(YangAec* aec);
 #endif /* INCLUDE_YANGWEBRTC_YANGMETACONNECTION_H_ */

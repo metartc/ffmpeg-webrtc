@@ -171,36 +171,36 @@ static void g_ff_rtc_setPlayMediaConfig(YangAudioParam *remote_audio,YangVideoPa
 	WEBRTCContext *s = (WEBRTCContext*)user;
 	AVFormatContext *h = s->avctx;
 	//audio.
-	    s->audio_codec = remote_audio->encode;
-	    if (s->audio_codec != Yang_AED_AAC && s->audio_codec != Yang_AED_OPUS) {
-	        av_log(h, AV_LOG_ERROR,
-	                "OnAudioInfoCallback, unknown audio codec %d\n",
-	                s->audio_codec);
-	        return;
-	    }
-	    s->sample_rate = remote_audio->sample;
-	    s->num_channels = remote_audio->channel;
-	    av_log(h, AV_LOG_INFO, "AudioInfo, audio codec %d, sample rate %d, num channels %d\n",
-	    		s->audio_codec, s->sample_rate, s->num_channels);
-		if (h->ctx_flags & AVFMTCTX_NOHEADER) {
-				AVPacket *pkt1 = &s->audio_pkt;
-				av_new_packet(pkt1, 0);
-				pkt1->stream_index = s->audio_stream_index_in;
-				packet_queue_put(&s->queue, pkt1, s);
-
-			}
-
-	    //video
-	    s->video_codec = remote_video->encode;
-
-	        if (s->video_codec != Yang_VED_264 && s->video_codec != Yang_VED_265) {
-	            av_log(h, AV_LOG_ERROR,
-	                    "OnVideoInfoCallback, unknown video codec %d\n",
-	                    s->video_codec);
-	            return;
-	        }
-	        av_log(h, AV_LOG_INFO, "VideoInfo, video codec %d\n", remote_video->encode);
-
+	s->audio_codec = remote_audio->encode;
+	if (s->audio_codec != Yang_AED_AAC && s->audio_codec != Yang_AED_OPUS) {
+		av_log(h, AV_LOG_ERROR,
+		"OnAudioInfoCallback, unknown audio codec %d\n",
+		s->audio_codec);
+		return;
+	}
+	s->sample_rate = remote_audio->sample;
+	s->num_channels = remote_audio->channel;
+	av_log(h, AV_LOG_INFO, "AudioInfo, audio codec %d, sample rate %d, num channels %d\n",
+	s->audio_codec, s->sample_rate, s->num_channels);
+	if (h->ctx_flags & AVFMTCTX_NOHEADER) {
+		AVPacket *pkt1 = &s->audio_pkt;
+		av_new_packet(pkt1, 0);
+		pkt1->stream_index = s->audio_stream_index_in;
+		packet_queue_put(&s->queue, pkt1, s);
+	
+	}
+	
+	//video
+	s->video_codec = remote_video->encode;
+	
+	if (s->video_codec != Yang_VED_264 && s->video_codec != Yang_VED_265) {
+		av_log(h, AV_LOG_ERROR,
+		"OnVideoInfoCallback, unknown video codec %d\n",
+		s->video_codec);
+		return;
+	}
+	av_log(h, AV_LOG_INFO, "VideoInfo, video codec %d\n", remote_video->encode);
+	
 
 }
 
@@ -259,10 +259,11 @@ static void g_ff_rtc_receiveVideo(YangFrame *videoFrame,void* user){
 	}
 	if(s->extradata_size ==0 ) return;
 	   AVPacket *pkt = &s->video_pkt;
-
+		
 	    av_new_packet(pkt, videoFrame->nb);
 	    memcpy(pkt->data, videoFrame->payload, videoFrame->nb);
 	    memcpy(pkt->data, s->video_header, 4);
+	 
 	    pkt->stream_index = s->video_stream_index_in;
 	    pkt->dts = videoFrame->pts;
 	    pkt->pts = videoFrame->pts;
@@ -435,7 +436,7 @@ static AVStream *create_stream(AVFormatContext *s, int codec_type)
             }
 
         }
-
+		set_stream_pts_info(st, 64, 1, 90000);
     }
 
     if (codec_type == AVMEDIA_TYPE_AUDIO) {
@@ -449,10 +450,11 @@ static AVStream *create_stream(AVFormatContext *s, int codec_type)
         st->codecpar->channels = h->num_channels;
         st->need_parsing = AVSTREAM_PARSE_HEADERS;
         h->audio_stream_index_out = st->index;
+        set_stream_pts_info(st, 64, 1, h->sample_rate);
 
     }
 
-    set_stream_pts_info(st, 64, 1, 1000);/* 64 bit pts in ms */
+    
     return st;
 }
 

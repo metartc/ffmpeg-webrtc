@@ -71,7 +71,7 @@ typedef enum YangRtcMessageType{
 }YangRtcMessageType;
 typedef struct{
 	void *context;
-	void (*init)(void* context,int32_t sample,int32_t channel);
+	void (*init)(void* context,int32_t sample,int32_t channel,int32_t echopath);
 	void (*closeAec)(void* context);
 
 	void (*echoCapture)(void* context,short *rec, short *out);

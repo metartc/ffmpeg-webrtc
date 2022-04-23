@@ -1,9 +1,6 @@
-/*
- * YangMetaConnection.h
- *
- *  Created on: 2022年1月16日
- *      Author: yang
- */
+//
+// Copyright (c) 2019-2022 yanggaofeng
+//
 
 #ifndef INCLUDE_YANGWEBRTC_YANGMETACONNECTION_H_
 #define INCLUDE_YANGWEBRTC_YANGMETACONNECTION_H_
@@ -100,7 +97,7 @@ typedef struct {
 	int32_t (*getState)(void* context);
 	int32_t (*recvvideoNotify)(void* context, YangRtcMessageType mess);
 }YangMetaConnection;
-void yang_init_metaConnection(YangMetaConnection* metaconn);
+void yang_create_metaConnection(YangMetaConnection* metaconn);
 void yang_destroy_metaConnection(YangMetaConnection* metaconn);
 void yang_init_aec(YangAec* aec);
 void yang_destroy_aec(YangAec* aec);

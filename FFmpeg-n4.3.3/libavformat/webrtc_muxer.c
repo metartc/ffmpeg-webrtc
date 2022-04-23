@@ -1,4 +1,6 @@
-
+//
+// Copyright (c) 2019-2022 yanggaofeng
+//
 
 #include "avformat.h"
 
@@ -131,7 +133,7 @@ static int webrtc_open(AVFormatContext *h, const char *uri)
 
 
     s->handle =(YangMetaConnection*) calloc(sizeof(YangMetaConnection),1);
-    yang_init_metaConnection(s->handle);
+    yang_create_metaConnection(s->handle);
     YangMetaRtcCallback callback;
     callback.sendRequest=g_ff_rtc_sendRequest;
     callback.setPlayMediaConfig=g_ff_rtc_setPlayMediaConfig;

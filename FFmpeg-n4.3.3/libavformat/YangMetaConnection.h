@@ -9,6 +9,9 @@
 #define YANG_Frametype_Spspps 9
 #define YANG_Frametype_I 1
 #define YANG_Frametype_P 0
+#define Yang_Server_Srs 0
+#define Yang_Server_Zlm 1
+#define Yang_Server_P2p 9
 typedef enum  {
 	Yang_Stream_Play, Yang_Stream_Publish, Yang_Stream_Both
 }YangStreamOptType;
@@ -89,7 +92,7 @@ typedef struct {
 	void (*init)(void* context,YangMetaRtcCallback* callback,void* user);
 	int32_t (*initParam)(void* context,char* url,YangStreamOptType opt);
 	void  (*parseHeader)(YangVideoCodec codec,uint8_t *buf, uint8_t *src, int32_t *hLen);
-	int32_t (*connectServer)(void* context);
+	int32_t (*connectServer)(void* context,int32_t mediaServer);
 	int32_t (*disconnectServer)(void* context);
 	void (*setExtradata)(void* context,YangVideoCodec codec,uint8_t *extradata,int32_t extradata_size);
 	int32_t (*publishAudio)(void* context,YangFrame* audioFrame);

@@ -143,8 +143,9 @@ static int webrtc_open(AVFormatContext *h, const char *uri)
 
 	if(s->handle->init) s->handle->init(s->handle->context,&callback,s);
     if(s->handle->initParam) s->handle->initParam(s->handle->context,uri,Yang_Stream_Publish);
-
-    if(s->handle->connectServer(s->handle->context)!=0){
+    //Yang_Server_Srs/Yang_Server_Zlm/Yang_Server_P2p
+        int32_t mediaServer=Yang_Server_Srs;
+    if(s->handle->connectServer(s->handle->context,mediaServer)!=0){
     	av_log(h, AV_LOG_ERROR, "connect failed! uri= %s\n",uri);
     }
 

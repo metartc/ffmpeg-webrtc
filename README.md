@@ -7,17 +7,17 @@
 将Yang_HaveDatachannel设为0  
 
 # mbedtls3编译
-解压metartc5/mbedtls-3.2.1.7z 
-./cmake_x64.sh
-或者
-./cmake_android.sh
+解压metartc5/mbedtls-3.2.1.7z   
+./cmake_x64.sh  
+或者  
+./cmake_android.sh  
 
 # srtp编译
-解压metartc5/libsrtp-2.4.2.7z  
-./cmake_x64.sh
-或者
-./cmake_android.sh
-编译后可重命名libsrtp2_mbed.a
+解压metartc5/libsrtp-2.4.2.7z     
+./cmake_x64.sh  
+或者  
+./cmake_android.sh  
+编译后可重命名libsrtp2_mbed.a  
   
 # ffmpeg编译
 将编译的libmetartccore5.a和其他第三方库放入metartc5目录里  

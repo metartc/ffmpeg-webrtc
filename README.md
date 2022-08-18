@@ -1,5 +1,5 @@
 # ffmpeg-metartc
-集成到ffmpeg的metaRTC
+集成到metaRTC到ffmpeg，使ffmpeg支持webrtc
 
 # metartc5编译
 git clone https://github.com/metartc/metaRTC.git  

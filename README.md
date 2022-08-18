@@ -1,10 +1,15 @@
 # ffmpeg-metartc
 集成到ffmpeg的metaRTC
 
-编译metartc5时  
+# metartc5编译
+git clone https://github.com/metartc/metaRTC.git  
 修改include/yang_config.h   
 #define Yang_HaveDatachannel 1  
 将Yang_HaveDatachannel设为0  
+cd libmetartccore5  
+./cmake_x64.sh  
+或者  
+./cmake_android.sh  
 
 # mbedtls3编译
 解压metartc5/mbedtls-3.2.1.7z   

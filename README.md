@@ -4,9 +4,10 @@
 # metartc5编译
 git clone https://github.com/metartc/metaRTC.git  
 修改include/yang_config.h   
+## 对接srs
 #define Yang_HaveDatachannel 1  
 将Yang_HaveDatachannel设为0  
-
+## ssl库
 metaRTC5 linux版本默认ssl库为mbedtls  
 使用openssl 修改#define Yang_Using_Openssl 0  
 将Yang_Using_Openssl设为1    

@@ -47,9 +47,9 @@ int32_t yang_sortBuffer_insert(YangSortFrame** vec,int64_t value,YangFrame* pfra
 
 	index=yang_get_sortBuffer_index(vec,value,alen);
 	if(index==-1) return 1;
-	memmove((char*) vec + (index + 1) * sizeof(YangSortFrame),
-				(char*) vec + index * sizeof(YangSortFrame),
-				sizeof(YangSortFrame) * (alen - index));
+	memmove((char*) vec + (index + 1) * sizeof(YangSortFrame*),
+				(char*) vec + index * sizeof(YangSortFrame*),
+				sizeof(YangSortFrame*) * (alen - index));
 	vec[index]->pts=value;
 	yang_frame_copy_buffer(pframe, &vec[index]->frame);
 	*vsize=alen+1;
@@ -65,7 +65,6 @@ void yang_sortBuffer_initFrames(YangSortBufferSession* session,int32_t pnum, int
 		session->frames =(YangSortFrame**) calloc(sizeof(YangSortFrame*),pnum);
 		for (int32_t i = 0; i < pnum; i++) {
 			session->frames[i] = (YangSortFrame*)calloc(sizeof(YangSortFrame),1);
-			memset(session->frames[i],0,sizeof(YangFrame));
 			session->frames[i]->frame.payload = session->bufferManager+i*unitsize;
 		}
 	}
@@ -83,7 +82,7 @@ void yang_sortBuffer_putFrame(YangSortBufferSession* session,int64_t pts,YangFra
 void yang_sortBuffer_removeFirst(YangSortBufferSession* session){
     if (session->vsize-session->cacheNum<1 || session->vsize<1)				return ;
 	session->lastPts=session->frames[0]->pts;
-	memmove((char*)session->frames,(char*)session->frames+sizeof(YangSortFrame),sizeof(YangSortFrame)*(session->vsize-1));
+	memmove((char*)session->frames,(char*)session->frames+sizeof(YangSortFrame*),sizeof(YangSortFrame*)*(session->vsize-1));
 	session->vsize--;
 }
 

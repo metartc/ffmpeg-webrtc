@@ -8,7 +8,7 @@
 
 #include "libavformat/avformat.h"
 #include "libavformat/url.h"
-#include <pthread.h>
+#include "libavutil/thread.h"
 
 #include "libavformat/YangMetaConnection.h"
 

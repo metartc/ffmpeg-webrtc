@@ -257,12 +257,12 @@ static int webrtc_write_packet(AVFormatContext *h, AVPacket *pkt)
 		s->video_frame.payload=pkt->data;
 		s->video_frame.pts=pkt->pts*1000000/s->time_base_den;
 
-		ret=metaconn->publishVideo(metaconn->session,&s->video_frame);
+		ret=metaconn->on_video(metaconn->session,&s->video_frame);
 	}else if(pkt->stream_index==s->audio_stream_index){
 		s->audio_frame.nb=pkt->size;
 		s->audio_frame.payload=pkt->data;
 		s->audio_frame.pts=pkt->pts;
-		ret=metaconn->publishAudio(metaconn->session,&s->audio_frame);
+		ret=metaconn->on_audio(metaconn->session,&s->audio_frame);
 	}
 
 	return ret;

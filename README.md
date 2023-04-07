@@ -10,6 +10,6 @@ cd libmetartccore6
 
 
 # ffmpeg编译
-将编译的libmetartccore6.a和其他第三方库放入metartc5目录里  
+将编译的libmetartccore6.a和其他第三方库放入metartc6目录里  
 ./configure --enable-libx264 --enable-gpl --extra-libs='-L/home/yang/FFmpeg-n4.3.3/metartc6 -lmetartccore6 -lpthread -lspeexdsp -lsrtp2 -lssl -lcrypto -ldl'  
 make -j8  

@@ -1,8 +1,8 @@
 # ffmpeg-webrtc
 集成到metaRTC到ffmpeg，使ffmpeg支持webrtc
 
-# metartc5编译
-cd FFmpeg-n4.3.3/metartc6/metartc6 
+# metartc6编译
+cd FFmpeg-n4.3.3/metartc6/metartc6  
 cd libmetartccore6  
 ./cmake_x64.sh  
 或者  

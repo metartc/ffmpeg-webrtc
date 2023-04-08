@@ -2,7 +2,8 @@
 implement whip and whep protocol  
 WHIP: WebRTC HTTP Ingestion Protocol  
 WHEP: WebRTC HTTP Egress Protocol  
-集成到metaRTC到ffmpeg，使ffmpeg支持webrtc
+集成到metaRTC到ffmpeg，使ffmpeg支持webrtc  
+Integration into metaRTC to ffmpeg makes ffmpeg support webRTC  
 
 # metartc6 compile
 cd FFmpeg-n4.3.3/metartc6/metartc6  
@@ -12,7 +13,7 @@ cd build
 ./cmake_x64.sh  
 or  
 ./cmake_android.sh  
-
+cp ./libmetartccore6.a ../../  
 
 # ffmpeg compile
 将编译的libmetartccore6.a和其他第三方库放入FFmpeg-n4.3.3/metartc6/目录里  

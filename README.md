@@ -18,7 +18,7 @@ make -j8
 
 
 # 推流命令
-ffmpeg ......-acodec opus -strict -2 -ar 48000 -f webrtc "url"
+ffmpeg ......-acodec opus -strict -2 -ar 48000 -f webrtc "url"  
 srs sample: whip url http://192.168.0.105:1985/rtc/v1/whip/?app=live&stream=livestream  
 ffmpeg ......-acodec opus -strict -2 -ar 48000 -f webrtc "http://192.168.0.105:1985/rtc/v1/whip/?app=live&stream=livestream"  
 ffmpeg ......-acodec opus -strict -2 -ar 48000 -f webrtc "webrtc://192.168.0.105:1985/rtc/v1/whip/?app=live&stream=livestream"  

@@ -1,4 +1,7 @@
 # ffmpeg-webrtc
+implement whip and whep protocol  
+WHIP: WebRTC HTTP Ingestion Protocol  
+WHEP: WebRTC HTTP Egress Protocol  
 集成到metaRTC到ffmpeg，使ffmpeg支持webrtc
 
 # metartc6 compile

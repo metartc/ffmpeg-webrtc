@@ -125,7 +125,7 @@ static int webrtc_open(AVFormatContext *h, const char *uri)
 
 
 
-	if (!av_strstart(uri, "webrtc://", NULL))  {
+	if (!av_strstart(uri, "webrtc://", NULL)&&!av_strstart(uri, "http://", NULL)&&!av_strstart(uri, "https://", NULL))  {
 		return AVERROR(EINVAL);
 	}
 
@@ -149,7 +149,7 @@ static int webrtc_open(AVFormatContext *h, const char *uri)
 	if(s->handle->init) s->handle->init(s->handle->session,&stream,s);
 	if(s->handle->initParam) s->handle->initParam(s->handle->session,uri,Yang_Stream_Publish);
 	//Yang_Server_Srs/Yang_Server_Zlm/Yang_Server_P2p
-	int32_t mediaServer=Yang_Server_Srs;
+	int32_t mediaServer=Yang_Server_Whip_Whep;
 	if(s->handle->connectSfuServer(s->handle->session,mediaServer)!=0){
 		av_log(h, AV_LOG_ERROR, "connect failed! uri= %s\n",uri);
 	}

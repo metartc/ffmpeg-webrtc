@@ -19,15 +19,15 @@ make -j8
 
 # 推流命令
 ffmpeg ......-acodec opus -strict -2 -ar 48000 -f webrtc "url"
-如srs whip url:http://192.168.0.105:1985/rtc/v1/whip/?app=live&stream=livestream  
+srs sample: whip url http://192.168.0.105:1985/rtc/v1/whip/?app=live&stream=livestream  
 ffmpeg ......-acodec opus -strict -2 -ar 48000 -f webrtc "http://192.168.0.105:1985/rtc/v1/whip/?app=live&stream=livestream"  
 ffmpeg ......-acodec opus -strict -2 -ar 48000 -f webrtc "webrtc://192.168.0.105:1985/rtc/v1/whip/?app=live&stream=livestream"  
 ./ffmpeg -re -i /path/test.mp4 -vcodec libx264 -acodec opus -strict -2 -ar 48000 -f webrtc "http://192.168.0.105:1985/rtc/v1/whip/?app=live&stream=livestream"
 
 
 # 拉流命令
-ffplay "webrtc://whep_url  
-srs whep url:  http://192.168.0.105:1985/rtc/v1/whip-play/?app=live&stream=livestream  
+ffplay "webrtc://whep_url"  
+srs sample: whep url http://192.168.0.105:1985/rtc/v1/whip-play/?app=live&stream=livestream  
 ffplay "webrtc://192.168.0.105:1985/rtc/v1/whip-play/?app=live&stream=livestream"  
 
 
